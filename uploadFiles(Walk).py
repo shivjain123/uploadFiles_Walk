@@ -12,9 +12,13 @@ class TransferData:
 
         dbx = dropbox.Dropbox(self.access_token)
 
-        local_path = input("Enter file path.")
-
         for root, sub_folders, files in os.walk(file_from):
+
+            for sub_folders in root:
+                folder_path = os.path.join(root, sub_folders)
+            
+            for files in sub_folders:
+                local_path = os.path.join(folder_path, files)
 
             relative_path = os.path.relpath(local_path, file_from)
             dropbox_path = os.path.join(file_to, relative_path)
